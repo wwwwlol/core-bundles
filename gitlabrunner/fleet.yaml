@@ -3,10 +3,10 @@ defaultNamespace: gitlab
 # labels:
 #   bundle: cicd-services-gitlab-runner
 
-dependsOn:
-  - selector:
-      matchLabels:
-        bundle: cicd-services-gitlab
+# dependsOn:
+#   - selector:
+#       matchLabels:
+#         bundle: cicd-services-gitlab
 
 helm:
   repo: https://charts.gitlab.io
