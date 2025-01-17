@@ -1,0 +1,56 @@
+imagePullPolicy: Always
+
+serviceAccount:
+  name: gitlab-runner
+  create: true
+
+rbac:
+  create: true
+
+service:
+  enabled: true
+
+concurrent: 2
+checkInterval: 0
+logFormat: "text"
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+
+gitlabUrl: "https://gitlab.armedia.com/"
+runnerToken: "value-redacted-for-security!"
+
+runners:
+  name : "gitlab-runner-01"
+  config: |
+    [[runners]]
+      output_limit = 50000
+      environment = [ "JAVA=11", "NODE=16.14" ]
+      builds_dir = "/home/jenkins/gitlab"
+      cache_dir = "/cache.gitlab"
+      [runners.custom_build_dir]
+      [runners.kubernetes]
+        namespace = "{{ .Release.Namespace }}"
+        image = "alpine:latest"
+        pull_policy = "always"
+      [[runners.kubernetes.dns_config.options]]
+        name = "ndots"
+        value = "1"
+
+volumeMounts:
+  - name: &ca-certs "ca-certs"
+    mountPath: "/home/gitlab-runner/.gitlab-runner/certs/ca-trusts.crt"
+    readOnly: true
+    subPath: &ca-trusts "ca-trusts.pem"
+
+volumes:
+  - name: *ca-certs
+    configMap:
+      name: "ca-trusts"
+      defaultMode: 0444
+      optional: false
+      items:
+        - key: *ca-trusts
+          path: *ca-trusts
