@@ -1,6 +1,6 @@
 defaultNamespace: harbor
 helm:
-  version: 2.9.5
+  version: 1.13.5
   repo: https://helm.goharbor.io
   chart: harbor
   releaseName: harbor
