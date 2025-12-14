@@ -7,5 +7,5 @@ spec:
     - name: http
       port: 8080
     selector:
-    app: frontend-deployment
+    app: frontend
 
