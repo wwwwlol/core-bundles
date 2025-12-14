@@ -6,3 +6,9 @@ namespaceAnnotations:
 name: my-app
 kustomize:
   dir: dev
+diff:
+  comparePatches:
+  - apiVersion: apps/v1
+    kind: Deployment
+    operations:
+    - {"op":"remove", "path":"/spec/replicas"}
