@@ -1,0 +1,8 @@
+defaultNamespace: app-1
+namespaceLabels:
+  app: app1
+namespaceAnnotations:
+  app: app2
+name: my-app
+kustomize:
+  dir: dev
