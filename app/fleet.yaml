@@ -11,6 +11,7 @@ diff:
   - apiVersion: apps/v1
     kind: Deployment
     name: frontend-deployment
-    namespace: app1
+    namespace: app-1
     operations:
-    - {"op":"ignore", "path":"/spec/replicas"}
+    - op: remove
+      path: /spec/replicas
