@@ -13,4 +13,4 @@ diff:
     name: frontend-deployment
     namespace: app1
     operations:
-    - {"op":"remove", "path":"/spec/replicas"}
+    - {"op":"ignore", "path":"/spec/replicas"}
