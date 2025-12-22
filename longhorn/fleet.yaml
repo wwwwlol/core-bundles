@@ -1,7 +1,7 @@
 
 defaultNamespace: longhorn-system
 helm:
-  version: 105.1.1+up1.7.3
+  version: 105.1.1+up1.7.4
   repo: https://charts.rancher.io
   chart: longhorn
   releaseName: longhorn
