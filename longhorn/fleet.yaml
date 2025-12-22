@@ -7,7 +7,7 @@ helm:
   releaseName: longhorn
   values:
     persistence:
-        defaultClass: false
+        defaultClass: true
 diff:
   comparePatches:
   - apiVersion: policy/v1beta1
