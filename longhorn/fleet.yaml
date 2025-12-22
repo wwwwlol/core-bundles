@@ -18,3 +18,6 @@ diff:
     namespace: longhorn-system
     operations:
     - {"op":"remove", "path":"/spec/ports/0"}   
+values:
+  persistence:
+      defaultClass: false
