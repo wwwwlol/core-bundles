@@ -18,4 +18,5 @@ targetCustomizations:
           debugClusterName: ${ .ClusterName }
 
           # Your original conditional logic
-          name: ${ if or (contains (lower .ClusterName) "test") (contains (lower .ClusterName) "stage") }${ .ClusterName }${ else }${ .ClusterName }-test${ end }
+          # name: ${ if or (contains (lower .ClusterName) "test") (contains (lower .ClusterName) "stage") }${ .ClusterName }${ else }${ .ClusterName }-test${ end }
+          name: ${ if or (contains "test" (lower .ClusterName)) (contains "stage" (lower .ClusterName)) }${ .ClusterName }${ else }${ .ClusterName }-test${ end }
