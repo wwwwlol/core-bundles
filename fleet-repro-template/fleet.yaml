@@ -1,0 +1,21 @@
+defaultNamespace: fleet-debug
+
+helm:
+  chart: oci://registry-1.docker.io/bitnamicharts/nginx
+  releaseName: fleet-debug
+  version: 15.0.0
+
+targetCustomizations:
+  - name: non-prod
+    clusterSelector:
+      matchLabels:
+        env: test
+
+    helm:
+      values:
+        cluster:
+          # Debug value so you can see what Fleet is actually injecting
+          debugClusterName: ${ .ClusterName }
+
+          # Your original conditional logic
+          name: ${ if or (contains (lower .ClusterName) "test") (contains (lower .ClusterName) "stage") }${ .ClusterName }${ else }${ .ClusterName }-test${ end }
