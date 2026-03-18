@@ -32,7 +32,7 @@ targetCustomizations:
     clusterName: rke3
     clusterSelector:
       matchLabels:
-        env: test
+        monitoring: true
     helm:
       values:
         cluster:
