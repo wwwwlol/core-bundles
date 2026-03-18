@@ -7,6 +7,8 @@ helm:
   releaseName: grafana-k8s-monitoring
   version: 3.8.0
   values:
+    cluster:
+          name: "default"
     prometheusOperatorObjects:
       enabled: true
       crds:
