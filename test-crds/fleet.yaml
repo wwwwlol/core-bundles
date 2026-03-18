@@ -1,0 +1,39 @@
+# fleet.yaml
+name: helm-grafana-test
+defaultNamespace: grafanacloud
+helm:
+  repo: https://grafana.github.io/helm-charts
+  chart: k8s-monitoring
+  releaseName: grafana-k8s-monitoring
+  version: 3.8.0
+  values:
+    prometheusOperatorObjects:
+      enabled: true
+      crds:
+        deploy: true
+
+targetCustomizations:
+
+  # Broad matcher — catches all env=test clusters including dxp
+  - name: non-prod
+    clusterSelector:
+      matchLabels:
+        env: test
+    helm:
+      values:
+        cluster:
+          name: "non-prod-cluster"
+
+  # Specific override for dxp — placed BEFORE non-prod so it gets overwritten
+  # This is the bug — move this to AFTER non-prod to fix it
+  - name: dxp-test
+    clusterName: rke3
+    clusterSelector:
+      matchLabels:
+        env: test
+    helm:
+      values:
+        prometheusOperatorObjects:
+          enabled: false
+          crds:
+            deploy: false
