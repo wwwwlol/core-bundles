@@ -22,7 +22,7 @@ targetCustomizations:
     helm:
       values:
         cluster:
-          name: "${.ClusterName}"
+          name: "test"
 
   # Specific override for dxp — placed BEFORE non-prod so it gets overwritten
   # This is the bug — move this to AFTER non-prod to fix it
@@ -34,7 +34,7 @@ targetCustomizations:
     helm:
       values:
         cluster:
-          name: "${.ClusterName}"
+          name: "test"
         prometheusOperatorObjects:
           enabled: false
           crds:
