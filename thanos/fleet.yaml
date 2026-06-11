@@ -2,10 +2,11 @@
 defaultNamespace: monitoring
 
 helm:
-  repo: https://thanos-community.github.io/helm-charts
+  #repo: https://thanos-community.github.io/helm-charts
   chart: thanos
   version: "0.18.0"
   releaseName: thanos-central
+  repo: oci://ghcr.io/thanos-community/charts/thanos
 
   # No values trimming — this is intentional to trigger the etcd size bug.
   # The thanos-community chart ships significantly more rendered manifest
