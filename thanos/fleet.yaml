@@ -1,0 +1,36 @@
+# fleet.yaml
+defaultNamespace: monitoring
+
+helm:
+  repo: https://thanos-community.github.io/helm-charts
+  chart: thanos
+  version: "0.18.0"
+  releaseName: thanos-central
+
+  # No values trimming — this is intentional to trigger the etcd size bug.
+  # The thanos-community chart ships significantly more rendered manifest
+  # data than the Bitnami chart, which pushes the resulting Fleet bundle
+  # object over etcd's default 1.5 MB request limit.
+  values:
+    query:
+      enabled: true
+      replicaCount: 2
+    queryFrontend:
+      enabled: true
+    storeGateway:
+      enabled: true
+    compactor:
+      enabled: true
+    ruler:
+      enabled: false
+    receive:
+      enabled: false
+    receiveDistributor:
+      enabled: false
+
+# Targeting a single cluster is enough to trigger the crash —
+# the bundle size is the issue, not the target count.
+targets:
+  - clusterSelector:
+      matchLabels:
+        env: staging
